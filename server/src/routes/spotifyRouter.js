@@ -1,12 +1,13 @@
 const express = require('express');
 const querystring = require('querystring');
+const path = require('path');
 
 const spotifyController = require('../controllers/spotifyController');
 const { generateRandomStateString } = require('../utils/helpers');
 
-const client_id = process.env.SPOTIFY_CLIENT_ID;
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirect_uri = 'http://localhost:3000/spotify/callback';
+const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
+const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
+const REDIRECT_URI = 'http://localhost:3000/spotify/callback';
 
 const stateKey = 'spotify_auth_state';
 
@@ -20,9 +21,9 @@ router.get('/', (req, res) => {
   res.redirect('https://accounts.spotify.com/authorize?' + // Redirect to spotify's login portal for oAuth 2.0 authentication; To receive authorization_code and state.
     querystring.stringify({
       response_type: 'code',
-      client_id: client_id,
+      client_id: CLIENT_ID,
       scope: scope,
-      redirect_uri: redirect_uri,
+      redirect_uri: REDIRECT_URI,
       state: state
     }));
 });
@@ -44,11 +45,11 @@ router.get('/callback', async (req, res) => {
         method: 'POST',
         body: querystring.stringify({
           code: code,
-          redirect_uri: redirect_uri,
+          redirect_uri: REDIRECT_URI,
           grant_type: 'authorization_code'
         }), 
         headers: {
-          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64')),
+          'Authorization': 'Basic ' + (Buffer.from(CLIENT_ID + ':' + CLIENT_SECRET).toString('base64')),
           'Content-type': 'application/x-www-form-urlencoded'
         },
       });
@@ -64,15 +65,18 @@ router.get('/callback', async (req, res) => {
         httpOnly: true,
         secure: true,
       });
-      res.redirect('http://localhost:8080');
+      // res.redirect('http://localhost:8080'); // Used for react
+      res.status(200).sendFile(path.join(__dirname, '../../../client/src/landingPage.html'));  // Used for testing; implementation before react
     }
   } catch (error) {
+    // TODO: Write out an actual error here!!
     console.log('err: ', error);
   }
 });
 
 router.get('/users-liked-songs', spotifyController.refreshAccessToken, spotifyController.getUserslikedSongs, (req, res) => {
-  res.status(200).redirect('http://localhost:8080');
+  // res.status(200).redirect('http://localhost:8080');
+  res.status(200).sendFile(path.join(__dirname, '../../client/src/landingPage.html'));
 });
 
 module.exports = router;

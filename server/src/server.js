@@ -32,9 +32,9 @@ const spotifyRouter = require('./routes/spotifyRouter');
 app.use(express.json())
    .use(cookieParser());
 
-// app.get('/', (req, res) => {
-//   return res.status(200).sendFile(path.join(__dirname, '../../client/src/index.html'));
-// });
+app.get('/', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../../client/src/login.html'));
+});
 
 app.use('/spotify', spotifyRouter);
 
