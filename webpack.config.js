@@ -14,7 +14,7 @@ module.exports = {
       publicPath: '/'
     },
     proxy: {
-      '/login': 'http://localhost:3000'
+      '/spotify': 'http://localhost:3000'
     },
     compress: true,
   },
