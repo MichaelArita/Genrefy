@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Login = () => {
+export const Login = () => {
   return(
     <>
       <h1> Hello world! Testing Testing </h1>
