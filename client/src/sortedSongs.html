@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(() => {
+            $.getJSON('sortedSongs.json', (data) => {
+                $.each(data, (i, f) => {
+                    let tblRow = '<tr>' + '<td>' + f.title + '</td>' + '<td>' + f.artistName + '</td>' + '</tr>';
+                    $(tblRow).appendTo('#songdata tbody');
+                });
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <a href="/landing-page">Back</a>
+    <a href="/send-file">playlist</a>
+    <h1>Sorted Songs playlist</h1>
+    <table id="songdata" border="2">
+        <thead>
+            <th>Song</th>
+            <th>Artist</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>

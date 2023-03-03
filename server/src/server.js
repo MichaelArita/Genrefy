@@ -32,13 +32,24 @@ const spotifyRouter = require('./routes/spotifyRouter');
 app.use(express.json())
    .use(cookieParser());
 
+app.get('/sorted-songs-playlist', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../../client/src/sortedSongs.html'));
+});
+
+app.get('/send-file', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../../sortedSongs.json'));
+});
+
+app.get('/landing-page', (req, res) => {
+  return res.status(200).sendFile(path.join(__dirname, '../../client/src/landingPage.html'));
+});
+    
+app.use('/spotify', spotifyRouter);
+    
+// app.get('/login', (req, res) => {
 app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../../client/src/login.html'));
 });
-
-app.use('/spotify', spotifyRouter);
-
-// app.get('/login', (req, res) => {
 //   const state = generateRandomStateString(16);
 //   res.cookie(stateKey, state);
 //   // console.log('Login state: ', state);
@@ -96,9 +107,9 @@ app.use('/spotify', spotifyRouter);
 //   }
 // });
 
-app.get('/likedSongs', async (req, res) => {
+// app.get('/likedSongs', async (req, res) => {
   
-});
+// });
 
 app.use((err, req, res, next) => {
   const defaultErr = {

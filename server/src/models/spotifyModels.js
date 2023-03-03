@@ -27,10 +27,7 @@ const Schema = mongoose.Schema;
 
 const artistSchema = new Schema({
   _id: String,
-  genre_ID: {
-    type: Schema.Types.ObjectId,
-    ref: 'genres'
-  }
+  genre_ID: []
 });
 
 const Artists = mongoose.model('artists', artistSchema);

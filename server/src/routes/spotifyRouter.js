@@ -3,6 +3,7 @@ const querystring = require('querystring');
 const path = require('path');
 
 const spotifyController = require('../controllers/spotifyController');
+const mongoDBController = require('../controllers/mongoDatabaseController');
 const { generateRandomStateString } = require('../utils/helpers');
 
 const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
@@ -74,9 +75,20 @@ router.get('/callback', async (req, res) => {
   }
 });
 
-router.get('/users-liked-songs', spotifyController.refreshAccessToken, spotifyController.getUserslikedSongs, (req, res) => {
+router.get('/users-liked-songs', spotifyController.getUserslikedSongs, (req, res) => {
   // res.status(200).redirect('http://localhost:8080');
-  res.status(200).sendFile(path.join(__dirname, '../../client/src/landingPage.html'));
+  // res.sendStatus(200);
+  console.log('USERS LIKED SONGS: ', res.locals.likedSongs);
+  res.status(200).sendFile(path.join(__dirname, '../../../client/src/landingPage.html'));
+});
+
+router.get('/testing-path', spotifyController.formatData, (req, res) => {
+  res.status(200).redirect('/landing-page');
+});
+
+router.get('/create-playlist', spotifyController.refreshAccessToken, spotifyController.getUserslikedSongs, spotifyController.getArtist, (req, res) => {
+  // console.log(res.locals.likedSongs);
+  res.status(200).redirect('/sorted-songs-playlist');
 });
 
 module.exports = router;
