@@ -15,15 +15,15 @@ mongoose.connect(MONGO_URI, {
 
 const Schema = mongoose.Schema;
 
-// const songSchema = new Schema({
-//   _id: String,
-//   artist_ID: {
-//     type: Schema.Types.ObjectId,
-//     ref: 'artists'
-//   }
-// });
+const songSchema = new Schema({
+  _id: String,
+  artist_ID: {
+    type: Schema.Types.ObjectId,
+    ref: 'artists'
+  }
+});
 
-// const Songs = mongoose.model('songs', songSchema);
+const Songs = mongoose.model('songs', songSchema);
 
 const artistSchema = new Schema({
   _id: String,
@@ -40,6 +40,7 @@ const genreSchema = new Schema({
 const Genre = mongoose.model('genres', genreSchema);
 
 module.exports = {
+  Songs,
   Artists,
   Genre
 };

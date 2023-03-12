@@ -122,6 +122,7 @@ spotifyController.getUserslikedSongs = async (req, res, next) => {
     // res.locals.genres = ['chillhop'];
     // res.locals.genres = ['pop'];
     res.locals.genres = ['k-rap'];
+    // res.locals.genres = ['anime', 'j-pixie'];
     return next();
   } catch (error) {
     // TODO: Make sure to actually type out this error!
@@ -146,8 +147,6 @@ spotifyController.getArtist = async (req, res, next) => {
     // // If the genre matches our genres, then add the song to a new list
     // // return the list through res.locals
     const checkArtists = await models.Artists.find();
-    // console.log(checkArtists);
-    
     for (const [id, song] of Object.entries(likedSongs)) {
       // console.log('\nID: ', id);
       // console.log('\nTitle: ', song.title);
@@ -200,17 +199,6 @@ spotifyController.getArtist = async (req, res, next) => {
       
     }
 
-
-    // for (const [id, song] of Object.entries(likedSongs)) {
-    //   const dbResponse = await models.Songs.findOne({_id: id});
-    //   if (dbResponse === null) {
-
-    //   }
-    // }
-
-
-
-
     console.log('writing to file!');
     // console.log('\n\nSorted Songs:\n\n', sortedSongs);
     fs.writeFileSync('sortedSongs.json', JSON.stringify(sortedSongs, null, 2));
@@ -255,3 +243,4 @@ spotifyController.formatData = async (req, res, next) => {
 
 };
 module.exports = spotifyController;
+

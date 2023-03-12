@@ -1,5 +1,9 @@
 const models = require('../models/spotifyModels');
 
+const displaySongsFunction = () => {
+  
+};
+
 const generateRandomStateString = length => {
   let state = '';
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
