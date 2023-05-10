@@ -1,3 +1,7 @@
 h1 {
     color: red;
 }
+
+#primary-nav {
+  background-color: grey;
+};

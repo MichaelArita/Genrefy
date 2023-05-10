@@ -121,7 +121,8 @@ spotifyController.getUserslikedSongs = async (req, res, next) => {
      */
     // res.locals.genres = ['chillhop'];
     // res.locals.genres = ['pop'];
-    res.locals.genres = ['k-rap'];
+    // res.locals.genres = ['k-rap'];
+    res.locals.genres = ['viral pop'];
     // res.locals.genres = ['anime', 'j-pixie'];
     return next();
   } catch (error) {
