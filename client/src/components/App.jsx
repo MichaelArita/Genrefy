@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Routes, Route } from 'react-router';
 
 import { Login } from './Login.jsx';
-
+import { Test } from './Test.jsx';
 
 class App extends Component {
   render() {
@@ -14,8 +14,8 @@ class App extends Component {
           <a href='/spotify/users-liked-songs' className='test'>Next page</a>
         </div> */}
         <Routes>
-          <Route path='/' element={ <Login/>}/>
-
+          <Route path='/' element={<Login />} />
+          <Route path='/test' element={<Test />} />
         </Routes>
       </>
     );

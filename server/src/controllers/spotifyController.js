@@ -15,10 +15,12 @@ const spotifyController = {};
 spotifyController.refreshAccessToken = async (req, res, next) => {
 //   console.log(req.cookies);
   try {
-    console.log('REFRESHING USER ACCESS TOKEN');
+    // console.log('REFRESHING USER ACCESS TOKEN');
 
     const { access_token, refresh_token } = req.cookies;
     console.log(`access_token: ${access_token}\nrefresh_token: ${refresh_token}`);
+    // const accessTokenIsEmpty = access_token === "";
+
     if (!access_token) {
       const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',

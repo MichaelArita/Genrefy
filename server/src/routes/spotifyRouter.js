@@ -66,8 +66,8 @@ router.get('/callback', async (req, res) => {
         httpOnly: true,
         secure: true,
       });
-      // res.redirect('http://localhost:8080'); // Used for react
-      res.status(200).sendFile(path.join(__dirname, '../../../client/src/landingPage.html'));  // Used for testing; implementation before react
+      res.redirect('http://localhost:8080/test'); // Used for react
+      // res.status(200).sendFile(path.join(__dirname, '../../../client/src/landingPage.html'));  // Used for testing; implementation before react
     }
   } catch (error) {
     // TODO: Write out an actual error here!!
@@ -82,8 +82,8 @@ router.get('/users-liked-songs', spotifyController.getUserslikedSongs, (req, res
   res.status(200).sendFile(path.join(__dirname, '../../../client/src/landingPage.html'));
 });
 
-router.get('/testing-path', spotifyController.formatData, (req, res) => {
-  res.status(200).redirect('/landing-page');
+router.get('/testing-path', spotifyController.refreshAccessToken, (req, res) => {
+  res.status(200).redirect('http://localhost:8080/test');
 });
 
 router.get('/create-playlist', spotifyController.refreshAccessToken, spotifyController.getUserslikedSongs, spotifyController.getArtist, (req, res) => {
